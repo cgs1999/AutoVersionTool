@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<!-- webapp根目录，用于检测相对路径资源 -->
+	<webappRoot value="C:\demo" />
+	<!-- 处理后保存文件编码格式，缺省表示不更改文件编码格式，建议设置为UTF-8 -->
+	<fileCharset value="UTF-8" />
+	<!-- 主版本号，eg: /main.js?t=1.0.0.0_20140117中的"1.0.0.0" -->
+	<mainversion value="2.6.0.0" />
+	<!-- 版本号标签，eg: /main.js?t=1.0.0.0_20140117中的"t" -->
+	<versiontag value="t" />
+	<!-- 版本号连接符，eg: /main.js?t=1.0.0.0_20140117中的"_" -->
+	<versionconnector value="_" />
+
+	<!-- 处理目录或文件 -->
+    <sources>
+    	<!-- 
+    	source基本属性:
+	    	src			[必须]资源路径，可使用绝对路径或相对路径，并支持对指定文件或指定目录及其子目录下的文件进行处理
+			fileExt		[可选]资源过滤的文件扩展名，可多个（用逗号分隔），eg："js,jsp,html,htm"
+			regex		[可选]资源过滤正则表达式
+			ingorePath	[可选]忽略的资源路径，使用绝对路径，可多个（用逗号分隔）
+		资源过滤规则:
+			1) 若是ingorePath则跳过, 不处理
+			2) 若不是ingorePath, 存在fileExt则文件必须满足扩展名条件, 否则不处理文件
+								存在regex则文件名必须匹配, 否则不处理文件
+		例: 
+        <source src="C:\weibo\js" fileExt="js" regex="\\w*\\.js" ingorePath="C:\weibo\js\.svn,C:\weibo\js\Thumbs.db"/>
+        <source src="ext" regex="Ext\\w*\\.js"/>
+		<source src="C:\weibo\index.jsp" />
+		<source src="inc\header.jsp" />
+
+		另外, source高级配置, 可对指定的资源定义自己的版本信息、标签和匹配规则，
+		若存在定义则使用自定义，否则使用默认配置进行处理
+        <source src="seed-min.js">
+			<mainversion value="2.6.0.0" />
+			<versiontag value="t" />
+			<versionconnector value="_" />
+        	<tags />
+		    <matchs>    	
+		    	<match>
+		    		<regex><![CDATA[\\{path:"([^"]+)"]]></regex>
+		    		<matchIndex>1</matchIndex>
+		    		<fileExt>js</fileExt>
+		    	</match>
+		    </matchs>
+        </source>
+		-->
+		
+		<source src="C:\demo" fileExt="css,js,jsp,html,htm,vm" ingorePath="C:\demo\static\app\jslib,C:\demo\error"/>
+		<!--
+		<source src="C:\demo\static\common" fileExt="css,js,jsp,html,htm,vm"/>
+		-->
+    </sources>
+    
+    <!-- 标签设置 -->
+    <tags>
+    	<!-- 
+    	用于替换路径中的标签内容, 如: <img src="${RESOUCE_STATIC_URL}/images/main.jpg">中的${RESOUCE_STATIC_URL}
+    	tag基本属性:
+	    	name		[必须]标签名, 如:${RESOUCE_STATIC_URL}中,标签名为RESOUCE_STATIC_URL
+			value		[必须]对应的值
+		例: 
+        <tag name="RESOUCE_STATIC_URL" value="C:\demo\static\" />
+        <tag name="APP_BASE_URL" value="C:\demo\" />
+		-->
+		
+        <tag name="RESOUCE_STATIC_URL" value="C:\demo\static" />
+        <tag name="APP_BASE_URL" value="C:\demo" />
+        <tag name="APP_RESOUCE_URL" value="C:\demo\static\common" />
+    </tags>
+    
+    <!-- 内容匹配规则 -->
+    <matchs>
+    	<!-- 
+    	用于匹配资源文件内容
+    	tag下的子标签(注: 考虑到内容匹配正则表达式比较复杂, 往往需要加入标签, 使用属性不方便, 采用子标签更方便):
+	    	regex		[必须]内容匹配正则表达式
+			matchIndex	[必须]内容匹配URL的分组索引
+			fileExt		[必须]内容URL处理的文件扩展名，可多个（用逗号分隔），eg："js,jsp,html,htm"
+		例: 
+        1、处理Link标签
+    	<match>
+    		<regex><![CDATA[<link.*href="([^"]+)"(.*)?>]]></regex>
+    		<matchIndex>1</matchIndex>
+    		<fileExt>css,ico</fileExt>
+    	</match>
+    	
+    	2、处理Script标签
+    	<match>
+    		<regex><![CDATA[src="([^"]+)"(.*)?</script>]]></regex>
+    		<matchIndex>1</matchIndex>
+    		<fileExt>js</fileExt>
+    	</match>
+    	
+    	3、处理Img标签
+    	<match>
+    		<regex><![CDATA[<img.*src="([^"]+)"(.*)?>]]></regex>
+    		<matchIndex>1</matchIndex>
+    		<fileExt>png,gif,jpeg,jpg</fileExt>
+    	</match>
+    	
+    	4、CSS Image
+    	<match>
+    		<regex><![CDATA[url( *)?\\("([^"]+)"\\)]]></regex>
+    		<matchIndex>2</matchIndex>
+    		<fileExt>png,gif,jpeg,jpg</fileExt>
+    	</match>
+    	
+    	5、Kissy
+    	<match>
+    		<regex><![CDATA[\\{path:"([^"]+)"]]></regex>
+    		<matchIndex>1</matchIndex>
+    		<fileExt>js</fileExt>
+    	</match>
+		-->
+		
+		
+    	<!-- 处理Link标签 -->
+    	<match>
+    		<regex><![CDATA[<link.*href="([^"]+)"(.*)?>]]></regex>
+    		<matchIndex>1</matchIndex>
+    		<fileExt>css,ico</fileExt>
+    	</match>
+    	
+    	<!-- 处理Script标签 -->
+    	<match>
+    		<regex><![CDATA[src="([^"]+)"(.*)?</script>]]></regex>
+    		<matchIndex>1</matchIndex>
+    		<fileExt>js</fileExt>
+    	</match>
+    	
+    	<!-- 处理Img标签 -->
+    	<match>
+    		<regex><![CDATA[<img.*src="([^"]+)"(.*)?>]]></regex>
+    		<matchIndex>1</matchIndex>
+    		<fileExt>png,gif,jpeg,jpg</fileExt>
+    	</match>
+    	
+    	<!-- CSS Image -->
+    	<match>
+    		<regex><![CDATA[url( *)?\("([^"]+)"\)]]></regex>
+    		<matchIndex>2</matchIndex>
+    		<fileExt>png,gif,jpeg,jpg</fileExt>
+    	</match>
+    	
+    	<!-- Kissy -->
+    	<match>
+    		<regex><![CDATA[\{path:"([^"]+)"]]></regex>
+    		<matchIndex>1</matchIndex>
+    		<fileExt>js</fileExt>
+    	</match>
+    </matchs>
+</config>
