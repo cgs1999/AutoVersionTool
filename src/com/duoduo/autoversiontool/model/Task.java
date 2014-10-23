@@ -9,6 +9,8 @@ import java.util.List;
  */
 public class Task {
 
+	/** webapp根目录，用于检测相对路径资源 */
+	private String webappRoot;
 	/** 主版本号，eg: /main.js?t=1.0.0.0_20140117中的"1.0.0.0" */
 	private String mainVersion;
 	/** 版本号标签，eg: /main.js?t=1.0.0.0_20140117中的"t" */
@@ -19,6 +21,14 @@ public class Task {
 	private List<Tag> tags;
 	/** 内容匹配列表 */
 	private List<Match> matchs;
+
+	public String getWebappRoot() {
+		return webappRoot;
+	}
+
+	public void setWebappRoot(String webappRoot) {
+		this.webappRoot = webappRoot;
+	}
 
 	public String getMainVersion() {
 		return mainVersion;

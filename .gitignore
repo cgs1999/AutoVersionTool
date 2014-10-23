@@ -1,4 +1,5 @@
-.settings/org.eclipse.jdt.core.prefs
+.settings/
+bin/
 *.class
 AutoVersion.~ml
 log.txt

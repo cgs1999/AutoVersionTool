@@ -48,7 +48,6 @@ public class XmlParseHelper {
 	private static void parseConfig(Config config, Element parent) {
 		parseTask(config, parent);
 
-		config.setWebappRoot(getNodeData(parent, "webappRoot", "value"));
 		String fileCharset = getNodeData(parent, "fileCharset", "value");
 		if (fileCharset != null) {
 			config.setFileCharset(fileCharset);
@@ -62,6 +61,7 @@ public class XmlParseHelper {
 	 * @param element
 	 */
 	private static void parseTask(Task task, Element element) {
+		task.setWebappRoot(getNodeData(element, "webappRoot", "value"));
 		task.setMainVersion(getNodeData(element, "mainversion", "value"));
 		task.setVersionTag(getNodeData(element, "versiontag", "value"));
 		task.setVersionConnector(getNodeData(element, "versionconnector", "value"));
@@ -108,7 +108,7 @@ public class XmlParseHelper {
 				source.setIngorePath(ingorePath);
 			}
 
-			if (!element.elements().isEmpty()) {
+			if (element.elements() != null && !element.elements().isEmpty()) {
 				// 存在子节点，则设置自定义标识
 				source.setCustom(true);
 
