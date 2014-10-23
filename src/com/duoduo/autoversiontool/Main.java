@@ -57,12 +57,8 @@ public class Main {
 		for (Source source : config.getSources()) {
 			File sourceFile = FileHelper.getFile(source.getSrc());
 			if (!sourceFile.exists()) {
-				// 若文件不存在则尝试在当前路径下找
-				sourceFile = FileHelper.getFile(FileHelper.getCurrentDir() + source.getSrc());
-				if (!sourceFile.exists()) {
-					System.out.println("资源[" + source.getSrc() + "]不存在!");
-					continue;
-				}
+				System.out.println("资源[" + source.getSrc() + "]不存在!");
+				continue;
 			}
 
 			List<String> fileList = FileHelper.filterFile(sourceFile, source.getFileExt(), source.getRegex(),
@@ -71,6 +67,7 @@ public class Main {
 				System.out.println("--------------------------------------------");
 				System.out.println("正在处理文件 : " + path);
 				scanFile(path, config.getFileCharset());
+				// System.out.println("--> " + path);
 			}
 		}
 		long end = System.currentTimeMillis() - start;

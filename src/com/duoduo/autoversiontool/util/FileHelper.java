@@ -486,20 +486,6 @@ public class FileHelper {
 		return size.toString();
 	}
 
-	// 获取当前路径
-	public static String getCurrentDir() {
-		String dir = "";
-		File file = new File(""); // 设定为当前文件夹
-		try {
-			dir = file.getAbsolutePath(); // 获取绝对路径
-		} catch (Exception e) {
-		}
-		if (!"".equals(dir) && !dir.endsWith(File.separator)) {
-			dir = dir + File.separator;
-		}
-		return dir;
-	}
-
 	// 获取文件CheckSum
 	public static String getCheckSum(File file) {
 		return getCheckSum(file.getAbsolutePath());
@@ -528,8 +514,6 @@ public class FileHelper {
 		printCharset("C:\\fileencoding\\unicode.txt");
 		printCharset("C:\\fileencoding\\unicode_big.txt");
 		printCharset("C:\\fileencoding\\utf8.txt");
-
-		System.out.println("Current dir: " + getCurrentDir());
 	}
 
 	private static void printCharset(String filePath) {

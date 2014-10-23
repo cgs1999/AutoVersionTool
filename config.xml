@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
-	<!-- 处理后保存文件编码格式，缺省表示不更改文件编码格式，建议设置为UTF-8 -->
-	<fileCharset value="UTF-8" />
 	<!-- webapp根目录，用于检测相对路径资源 -->
 	<webappRoot value="C:\demo" />
+	<!-- 处理后保存文件编码格式，缺省表示不更改文件编码格式，建议设置为UTF-8 -->
+	<fileCharset value="UTF-8" />
 	<!-- 主版本号，eg: /main.js?t=1.0.0.0_20140117中的"1.0.0.0" -->
 	<mainversion value="2.6.0.0" />
 	<!-- 版本号标签，eg: /main.js?t=1.0.0.0_20140117中的"t" -->
@@ -32,7 +32,6 @@
 		另外, source高级配置, 可对指定的资源定义自己的版本信息、标签和匹配规则，
 		若存在定义则使用自定义，否则使用默认配置进行处理
         <source src="seed-min.js">
-			<webappRoot value="C:\demo" />
 			<mainversion value="2.6.0.0" />
 			<versiontag value="t" />
 			<versionconnector value="_" />
