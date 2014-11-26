@@ -185,10 +185,9 @@ public class Main {
 
 		if (path.startsWith("http://")) {
 			xPath = "";
-		}
-
-		if (path.startsWith("./") || path.startsWith("/")) {
+		} else if (path.startsWith("./")) {
 			path = path.replace("./", "");
+		} else if (path.startsWith("/")) {
 			xPath = config.getWebappRoot();
 		}
 
